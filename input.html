@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crop Prediction</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="input-page">
+
+<div class="form-box">
+
+<h2>Enter Soil Details</h2>
+
+<input type="number" id="nitrogen" placeholder="Nitrogen (N)">
+<input type="number" id="phosphorus" placeholder="Phosphorus (P)">
+<input type="number" id="potassium" placeholder="Potassium (K)">
+<input type="number" id="temperature" placeholder="Temperature">
+<input type="number" id="humidity" placeholder="Humidity">
+<input type="number" id="ph" placeholder="pH value">
+<input type="number" id="rainfall" placeholder="Rainfall">
+
+<button onclick="predictCrop()">Predict Crop</button>
+
+<h3 id="result"></h3>
+
+</div>
+
+<script>
+
+function predictCrop(){
+
+let n=document.getElementById("nitrogen").value;
+
+if(n>80)
+document.getElementById("result").innerHTML="Recommended Crop : Rice 🌾";
+
+else
+document.getElementById("result").innerHTML="Recommended Crop : Wheat 🌱";
+
+}
+
+</script>
+
+</body>
+</html>
