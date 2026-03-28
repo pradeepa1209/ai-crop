@@ -1,68 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crop Prediction</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="input-page">
+
+<div class="form-box">
+
+<h2>Enter Soil Details</h2>
+
+<input type="number" id="nitrogen" placeholder="Nitrogen (N)">
+<input type="number" id="phosphorus" placeholder="Phosphorus (P)">
+<input type="number" id="potassium" placeholder="Potassium (K)">
+<input type="number" id="temperature" placeholder="Temperature">
+<input type="number" id="humidity" placeholder="Humidity">
+<input type="number" id="ph" placeholder="pH value">
+<input type="number" id="rainfall" placeholder="Rainfall">
+
+<button onclick="predictCrop()">Predict Crop</button>
+
+<h3 id="result"></h3>
+
+</div>
+
 <script>
 
 function predictCrop(){
 
-let n = document.getElementById("nitrogen").value;
-let p = document.getElementById("phosphorus").value;
-let k = document.getElementById("potassium").value;
-let t = document.getElementById("temperature").value;
-let h = document.getElementById("humidity").value;
-let ph = document.getElementById("ph").value;
-let r = document.getElementById("rainfall").value;
+let n=document.getElementById("nitrogen").value;
+let p=document.getElementById("phosphorus").value;
+let k=document.getElementById("potassium").value;
+let t=document.getElementById("temperature").value;
+let h=document.getElementById("humidity").value;
+let ph=document.getElementById("ph").value;
+let r=document.getElementById("rainfall").value;
 
 // ✅ VALIDATION
 if(n==="" || p==="" || k==="" || t==="" || h==="" || ph==="" || r===""){
-    document.getElementById("result").innerHTML = "❌ Please fill all fields!";
-    return;
+document.getElementById("result").innerHTML="❌ Please fill all fields!";
+return;
 }
 
 // Convert to numbers
-n = parseFloat(n);
-p = parseFloat(p);
-k = parseFloat(k);
-t = parseFloat(t);
-h = parseFloat(h);
-ph = parseFloat(ph);
-r = parseFloat(r);
+n=parseFloat(n);
+p=parseFloat(p);
+k=parseFloat(k);
+t=parseFloat(t);
+h=parseFloat(h);
+ph=parseFloat(ph);
+r=parseFloat(r);
 
-// ✅ SMART LOGIC (based on your dataset patterns)
+// ✅ IMPROVED LOGIC
+if(n>80 && r>200)
+document.getElementById("result").innerHTML="Recommended Crop : Rice 🌾";
 
-let crop = "";
+else if(h>85)
+document.getElementById("result").innerHTML="Recommended Crop : Coconut 🥥";
 
-if(n > 80 && r > 200){
-    crop = "Rice 🌾";
-}
-else if(n >= 50 && t >= 22 && t <= 28){
-    crop = "Maize 🌽";
-}
-else if(p > 55){
-    crop = "Chickpea 🌱";
-}
-else if(h > 80 && t > 28){
-    crop = "Banana 🍌";
-}
-else if(t > 30 && h < 75){
-    crop = "Watermelon 🍉";
-}
-else if(h > 85){
-    crop = "Coconut 🥥";
-}
-else if(t < 22){
-    crop = "Apple 🍎";
-}
-else if(n < 20){
-    crop = "Orange 🍊";
-}
-else if(r > 150){
-    crop = "Papaya 🍈";
-}
-else{
-    crop = "Cotton 🌿";
-}
+else if(t>30)
+document.getElementById("result").innerHTML="Recommended Crop : Watermelon 🍉";
 
-// ✅ SHOW RESULT
-document.getElementById("result").innerHTML = "🌱 Recommended Crop: " + crop;
+else if(n<20)
+document.getElementById("result").innerHTML="Recommended Crop : Apple 🍎";
+
+else
+document.getElementById("result").innerHTML="Recommended Crop : Maize 🌽";
 
 }
 
 </script>
+
+</body>
+</html>
