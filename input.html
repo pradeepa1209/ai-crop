@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Crop Prediction</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body class="input-page">
@@ -11,35 +11,25 @@
 
 <h2>Enter Soil Details</h2>
 
-<input type="number" id="nitrogen" placeholder="Nitrogen (N)">
-<input type="number" id="phosphorus" placeholder="Phosphorus (P)">
-<input type="number" id="potassium" placeholder="Potassium (K)">
-<input type="number" id="temperature" placeholder="Temperature">
-<input type="number" id="humidity" placeholder="Humidity">
-<input type="number" id="ph" placeholder="pH value">
-<input type="number" id="rainfall" placeholder="Rainfall">
+<form action="/predict" method="POST">
 
-<button onclick="predictCrop()">Predict Crop</button>
+<input type="number" name="N" placeholder="Nitrogen (N)" required>
+<input type="number" name="P" placeholder="Phosphorus (P)" required>
+<input type="number" name="K" placeholder="Potassium (K)" required>
+<input type="number" name="temperature" placeholder="Temperature" required>
+<input type="number" name="humidity" placeholder="Humidity" required>
+<input type="number" name="ph" placeholder="pH value" required>
+<input type="number" name="rainfall" placeholder="Rainfall" required>
 
-<h3 id="result"></h3>
+<button type="submit">Predict Crop</button>
+
+</form>
+
+{% if result %}
+<h3>🌱 Recommended Crop: {{ result }}</h3>
+{% endif %}
 
 </div>
-
-<script>
-
-function predictCrop(){
-
-let n=document.getElementById("nitrogen").value;
-
-if(n>80)
-document.getElementById("result").innerHTML="Recommended Crop : Rice 🌾";
-
-else
-document.getElementById("result").innerHTML="Recommended Crop : Wheat 🌱";
-
-}
-
-</script>
 
 </body>
 </html>
