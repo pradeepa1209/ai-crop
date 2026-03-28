@@ -1,35 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Crop Prediction</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+<script>
 
-<body class="input-page">
+function predictCrop(){
 
-<div class="form-box">
+let n = document.getElementById("nitrogen").value;
+let p = document.getElementById("phosphorus").value;
+let k = document.getElementById("potassium").value;
+let t = document.getElementById("temperature").value;
+let h = document.getElementById("humidity").value;
+let ph = document.getElementById("ph").value;
+let r = document.getElementById("rainfall").value;
 
-<h2>Enter Soil Details</h2>
+// ✅ VALIDATION
+if(n==="" || p==="" || k==="" || t==="" || h==="" || ph==="" || r===""){
+    document.getElementById("result").innerHTML = "❌ Please fill all fields!";
+    return;
+}
 
-<form action="/predict" method="POST">
+// Convert to numbers
+n = parseFloat(n);
+p = parseFloat(p);
+k = parseFloat(k);
+t = parseFloat(t);
+h = parseFloat(h);
+ph = parseFloat(ph);
+r = parseFloat(r);
 
-<input type="number" name="N" placeholder="Nitrogen (N)" required>
-<input type="number" name="P" placeholder="Phosphorus (P)" required>
-<input type="number" name="K" placeholder="Potassium (K)" required>
-<input type="number" name="temperature" placeholder="Temperature" required>
-<input type="number" name="humidity" placeholder="Humidity" required>
-<input type="number" name="ph" placeholder="pH value" required>
-<input type="number" name="rainfall" placeholder="Rainfall" required>
+// ✅ SMART LOGIC (based on your dataset patterns)
 
-<button type="submit">Predict Crop</button>
+let crop = "";
 
-</form>
+if(n > 80 && r > 200){
+    crop = "Rice 🌾";
+}
+else if(n >= 50 && t >= 22 && t <= 28){
+    crop = "Maize 🌽";
+}
+else if(p > 55){
+    crop = "Chickpea 🌱";
+}
+else if(h > 80 && t > 28){
+    crop = "Banana 🍌";
+}
+else if(t > 30 && h < 75){
+    crop = "Watermelon 🍉";
+}
+else if(h > 85){
+    crop = "Coconut 🥥";
+}
+else if(t < 22){
+    crop = "Apple 🍎";
+}
+else if(n < 20){
+    crop = "Orange 🍊";
+}
+else if(r > 150){
+    crop = "Papaya 🍈";
+}
+else{
+    crop = "Cotton 🌿";
+}
 
-{% if result %}
-<h3>🌱 Recommended Crop: {{ result }}</h3>
-{% endif %}
+// ✅ SHOW RESULT
+document.getElementById("result").innerHTML = "🌱 Recommended Crop: " + crop;
 
-</div>
+}
 
-</body>
-</html>
+</script>
